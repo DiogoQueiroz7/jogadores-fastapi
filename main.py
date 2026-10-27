@@ -28,7 +28,7 @@ def listar_jogadores(posicao: str | None = None) -> list[JogadorSaida]:
         return jogadores
     resultado = []
     for j in jogadores:
-        if j["posicao"] == posicao:
+        if j["posicao"].lower() == posicao.lower():
             resultado.append(j)
     return resultado
 
@@ -47,7 +47,8 @@ def criar_jogador(jogador: JogadorEntrada) -> JogadorSaida:
     for j in jogadores:
         if j["id"] >= novo_id:
             novo_id = j["id"] + 1
-    novo = {"id": novo_id, "nome": jogador.nome, "posicao": jogador.posicao}
+
+    novo = {"id": novo_id, "nome": jogador.nome, "posicao": jogador.posicao.lower()}
     jogadores.append(novo)
     return novo
 
@@ -57,7 +58,7 @@ def atualizar_jogador(jogador_id: int, jogador: JogadorEntrada) -> JogadorSaida 
     for j in jogadores:
         if j["id"] == jogador_id:
             j["nome"] = jogador.nome
-            j["posicao"] = jogador.posicao
+            j["posicao"] = jogador.posicao.lower()
             return j
     return None
 
